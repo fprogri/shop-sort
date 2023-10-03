@@ -57895,7 +57895,7 @@ let products2 = products;
 // Function to display products
 function displayProducts(products) {
   const productList = document.querySelector(".product-list");
-  productList.innerHTML = `<p>${products2.length}</p>`;
+  productList.innerHTML = `<p>Product count: ${products2.length}</p>`;
 
   products.forEach((product) => {
     const link = "https://jysk.al/public/ck/prd/" + product.clickkon_product_id;
