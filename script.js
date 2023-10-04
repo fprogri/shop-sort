@@ -57911,12 +57911,12 @@ function displayProducts(products) {
     // Customize the content of the product card using the product object properties
     productCard.innerHTML = `
           <img src=${src}>
-          <a href=${link} target="_blank">${product.name}</a>
+          <a href=${link} target="_blank" class="path">${product.name}</a>
           <p>Ishte: ${product.price_w_vat} Lek</p>
           <p class="after-price">${product.fin_price_w_vat} Lek</p>
           <p>${discount}%</p>
           <p>${product.gen_cat.n}</p>
-          <p>${product.gen_cat.f_r_n}
+          <p class="path">${product.gen_cat.f_r_n}
           <p>${product.ind_camp_description}</p>
           <!-- Add more product details as needed -->
       `;
