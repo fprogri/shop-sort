@@ -57916,6 +57916,8 @@ function displayProducts(products) {
           <p class="after-price">${product.fin_price_w_vat} Lek</p>
           <p>${discount}%</p>
           <p>${product.gen_cat.n}</p>
+          <p>${product.gen_cat.f_r_n}
+          <p>${product.ind_camp_description}</p>
           <!-- Add more product details as needed -->
       `;
 
@@ -58034,3 +58036,55 @@ goldCategoryCheckbox.addEventListener("change", () => {
   // Filter products by the "GOLD" category
   filterByGoldCategory(showGoldCategory);
 });
+
+///////////////////////////////////////////////////////////////////////////
+
+const productSearchInput = document.getElementById("product-search");
+const searchButton = document.getElementById("search-button");
+
+// Add an event listener to the search button
+searchButton.addEventListener("click", () => {
+  const searchTerm = productSearchInput.value.trim().toLowerCase();
+  console.log(searchTerm);
+
+  // Perform the product search
+  performProductSearch(searchTerm);
+});
+
+// Add an event listener to the search input field to trigger the search on "Enter" key press
+productSearchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    const searchTerm = productSearchInput.value.trim().toLowerCase();
+
+    // Perform the product search
+    performProductSearch(searchTerm);
+  }
+});
+
+// Function to perform the product search
+function performProductSearch(searchTerm) {
+  console.log("in function");
+  products2 = products2.filter(
+    (product) =>
+      Object.values(product).some(
+        (value) =>
+          value !== null &&
+          typeof value === "string" &&
+          value.toLowerCase().includes(searchTerm)
+      )
+
+    // const productName = product.name.toLowerCase();
+    // let productDescription = "";
+    // if (product.ind_camp_description == true) {
+    //   productDescription = product.ind_camp_description.toLowerCase();
+    // }
+    // return (
+    //   productName.includes(searchTerm) ||
+    //   productDescription.includes(searchTerm)
+    // );
+  );
+
+  // Display the search results
+  displayProducts(products2);
+  console.log(products2);
+}
