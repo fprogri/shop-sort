@@ -10,6 +10,7 @@
 }
 
 .product-card {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,4 +42,9 @@ body{
 
 .filter{
     margin: 10px;
+    
 }
+.gold{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;}
