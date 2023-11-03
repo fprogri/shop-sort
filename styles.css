@@ -39,7 +39,7 @@ body {
 }
 
 .filter-controls {
-    /* margin: 10px */
+    margin: 10px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -54,9 +54,17 @@ body {
 }
 
 select,
-button,
 .gold {
     margin-right: 10px;
+}
+
+[type="number"],
+[type="text"] {
+    margin-right: -5px;
+}
+
+button {
+    margin-right: 20px;
 }
 
 #productCount {
