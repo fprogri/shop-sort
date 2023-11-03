@@ -1,11 +1,11 @@
-.product-list {    
+.product-list {
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-.path{
+.path {
     max-width: 201px;
 }
 
@@ -18,8 +18,9 @@
     width: 210px;
 }
 
-.sort{
-    display: flex;}
+.sort {
+    display: flex;
+}
 
 p {
     margin: auto;
@@ -29,22 +30,42 @@ p {
     font-weight: bold;
     font-size: large;
 }
-body{
-    
+
+body {
+
     font-family: monospace;
     margin: 30px;
-    margin-top: 0px;  
+    margin-top: 0px;
 }
 
-.filter-controls{
-    margin: 10px
+.filter-controls {
+    /* margin: 10px */
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.filter{
+/* .filter {
     margin: 10px;
-    
+
+} */
+
+.filter>* {
+    margin-top: 10px;
 }
-.gold{
+
+select,
+button,
+.gold {
+    margin-right: 10px;
+}
+
+#productCount {
+    place-self: center;
+}
+
+
+.gold {
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;}
+    align-items: center;
+}

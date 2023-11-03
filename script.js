@@ -2,7 +2,7 @@
 import products from "./products.js";
 function displayProducts(products) {
   const productList = document.querySelector(".product-list");
-  productList.innerHTML = `<p>Product count: ${products2.length}</p>`;
+  // productList.innerHTML = `<p>Product count: ${products2.length}</p>`;
 
   products.forEach((product) => {
     const link = "https://jysk.al/public/ck/prd/" + product.clickkon_product_id;
@@ -36,6 +36,8 @@ function displayProducts(products) {
 let products2 = products;
 
 //price filter functionality
+const productCount = document.getElementById("productCount");
+productCount.innerHTML = `<p>(${products2.length})</p>`;
 const minPriceInput = document.getElementById("min-price");
 const maxPriceInput = document.getElementById("max-price");
 const applyPriceFilterButton = document.getElementById("apply-price-filter");
