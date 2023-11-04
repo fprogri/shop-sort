@@ -20,7 +20,7 @@ function displayProducts(products) {
 
     // Customize the content of the product card using the product object properties
     productCard.innerHTML = `
-          <img src=${src}>
+          <img src=${src} loading="lazy">
           <p>${product.sc_id}</p>
           <a href=${link} target="_blank" class="path">${product.name}</a>
           <p>Ishte: ${product.price_w_vat} Lek</p>
