@@ -1,8 +1,11 @@
 //get the data
 import products from "./products.js";
+
 function displayProducts(products) {
+  const productCount = document.getElementById("productCount");
+  productCount.innerHTML = `<p>(${products.length})</p>`;
   const productList = document.querySelector(".product-list");
-  // productList.innerHTML = `<p>Product count: ${products2.length}</p>`;
+  productList.innerHTML = ``;
 
   products.forEach((product) => {
     const link = "https://jysk.al/public/ck/prd/" + product.clickkon_product_id;
@@ -32,22 +35,17 @@ function displayProducts(products) {
     // Append the product card to the product list container
     productList.appendChild(productCard);
   });
+  console.log(products.length);
 }
+
 let products2 = products;
 
 //price filter functionality
-const productCount = document.getElementById("productCount");
-productCount.innerHTML = `<p>(${products2.length})</p>`;
+
 const minPriceInput = document.getElementById("min-price");
 const maxPriceInput = document.getElementById("max-price");
 const applyPriceFilterButton = document.getElementById("apply-price-filter");
-applyPriceFilterButton.addEventListener("click", () => {
-  const minPrice = parseFloat(minPriceInput.value) || 0;
-  const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
 
-  // Filter products by the specified price range
-  filterByPriceRange(minPrice, maxPrice);
-});
 function filterByPriceRange(minPrice, maxPrice) {
   products2 = products2.filter((product) => {
     const productPrice = product.fin_price_w_vat;
@@ -57,6 +55,14 @@ function filterByPriceRange(minPrice, maxPrice) {
   // Display the filtered products
   displayProducts(products2);
 }
+
+applyPriceFilterButton.addEventListener("click", () => {
+  const minPrice = parseFloat(minPriceInput.value) || 0;
+  const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+
+  // Filter products by the specified price range
+  filterByPriceRange(minPrice, maxPrice);
+});
 
 //dic filter functionality
 const minDiscInput = document.getElementById("min-disc");
