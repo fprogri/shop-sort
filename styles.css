@@ -71,9 +71,12 @@ select,
     /* margin-right: -8px; */
     width: 100px;
     padding-left: 5px;
+    border: none;
+    border-bottom: 1px solid;
 }
 
 button {
+    cursor: pointer;
     /* border-radius: 4px; */
     margin-right: 20px;
     border-radius: 3px;
@@ -82,6 +85,10 @@ button {
     font-weight: bold;
     border: none;
     padding: 3px 7px 3px 7px;
+}
+
+button:hover {
+    background-color: #2b8eff;
 }
 
 #productCount {
@@ -93,4 +100,9 @@ button {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid;
 }
