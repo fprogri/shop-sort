@@ -2,6 +2,10 @@
 import products from "./products.js";
 
 function displayProducts(products) {
+  products = products.filter((product) => {
+    return product.ind_camp_description !== "Problematik";
+  });
+  // products.splice(50);
   const productCount = document.getElementById("productCount");
   productCount.innerHTML = `<p>(${products.length})</p>`;
   const productList = document.querySelector(".product-list");
@@ -246,3 +250,16 @@ function sortByScDescending() {
 }
 
 displayProducts(products);
+
+////////////////////////////////////////////////////////
+
+// function updateDiv2Margin() {
+//   var div1Height = document.querySelector(".filter-controls").offsetHeight;
+//   document.querySelector(".product-list").style.marginTop = div1Height + "px";
+// }
+
+// // Call the function initially
+// updateDiv2Margin();
+
+// // Add an event listener to update the margin if the viewport size changes
+// window.addEventListener("resize", updateDiv2Margin);
