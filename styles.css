@@ -75,6 +75,11 @@ select,
     border-bottom: 1px solid;
 }
 
+[type="text"]:focus,
+[type="number"]:focus {
+    outline: none;
+}
+
 button {
     cursor: pointer;
     /* border-radius: 4px; */
