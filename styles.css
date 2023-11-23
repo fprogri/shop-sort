@@ -111,3 +111,9 @@ select {
     border: none;
     border-bottom: 1px solid;
 }
+
+/* @media (max-width:539px) {
+    img {
+        width: 100vw;
+    }
+} */
