@@ -3,7 +3,7 @@ import products from "./products.js";
 
 function displayProducts(products) {
   products = products.filter((product) => {
-    return product.ind_camp_description !== "Problematik";
+    return product.ind_camp_description !== "KMP Problematik";
   });
   // products.splice(50);
   const productCount = document.getElementById("productCount");
