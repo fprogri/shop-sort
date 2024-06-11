@@ -1,48 +1,86 @@
 //get the data
 import products from "./products.js";
 
-function displayProducts(products) {
+const itemsPerPage = 30; // Number of items per page
+let currentPage = 1;
+let products2 = products;
+
+function displayProducts(products, page = 1) {
   products = products.filter((product) => {
     return product.ind_camp_description !== "KMP Problematik";
   });
-  // products.splice(50);
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
+
   const productCount = document.getElementById("productCount");
   productCount.innerHTML = `<p>(${products.length})</p>`;
   const productList = document.querySelector(".product-list");
   productList.innerHTML = ``;
 
-  products.forEach((product) => {
+  paginatedProducts.forEach((product) => {
     const link = "https://jysk.al/public/ck/prd/" + product.clickkon_product_id;
     const src = `https://jysk.al/public/clickkon/product/${product.clickkon_product_id}/image/small/download`;
     const discount = parseInt(
       ((product.price_w_vat - product.fin_price_w_vat) / product.price_w_vat) *
         100
     );
-    // Create a product card element for each product
+
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
 
-    // Customize the content of the product card using the product object properties
     productCard.innerHTML = `
-          <img src=${src} loading="lazy">
-          <p>${product.sc_id}</p>
-          <a href=${link} target="_blank" class="path">${product.name}</a>
-          <p>Ishte: ${product.price_w_vat} Lek</p>
-          <p class="after-price">${product.fin_price_w_vat} Lek</p>
-          <p>${discount}%</p>
-          <p>${product.gen_cat.n}</p>
-          <p class="path">${product.gen_cat.f_r_n}
-          <p>${product.ind_camp_description}</p>
-          <!-- Add more product details as needed -->
-      `;
+            <img src=${src} loading="lazy">
+            <p>${product.sc_id}</p>
+            <a href=${link} target="_blank" class="path">${product.name}</a>
+            <p>Ishte: ${product.price_w_vat} Lek</p>
+            <p class="after-price">${product.fin_price_w_vat} Lek</p>
+            <p>${discount}%</p>
+            <p>${product.gen_cat.n}</p>
+            <p class="path">${product.gen_cat.f_r_n}</p>
+            <p>${product.ind_camp_description}</p>
+        `;
 
-    // Append the product card to the product list container
     productList.appendChild(productCard);
   });
-  console.log(products.length);
+
+  updatePaginationControls(products, page);
 }
 
-let products2 = products;
+function updatePaginationControls(products, page) {
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const pageInfo = document.getElementById("page-info");
+  pageInfo.textContent = `Page ${page} of ${totalPages}`;
+
+  const prevPageButton = document.getElementById("prev-page");
+  const nextPageButton = document.getElementById("next-page");
+
+  prevPageButton.disabled = page === 1;
+  nextPageButton.disabled = page === totalPages;
+}
+
+document.getElementById("prev-page").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    displayProducts(products2, currentPage);
+  }
+});
+
+document.getElementById("next-page").addEventListener("click", () => {
+  const totalPages = Math.ceil(products2.length / itemsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    displayProducts(products2, currentPage);
+  }
+});
+
+// Apply existing filter, sort, and search functions
+// ...
+
+// displayProducts(products2, currentPage);
+
+// let products2 = products;
 
 //price filter functionality
 
