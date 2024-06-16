@@ -1,7 +1,7 @@
 //get the data
 import products from "./products.js";
 
-const itemsPerPage = 30; // Number of items per page
+const itemsPerPage = 90; // Number of items per page
 let currentPage = 1;
 let products2 = products;
 
