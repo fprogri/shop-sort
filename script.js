@@ -4,6 +4,18 @@ import products from "./products.js";
 const itemsPerPage = 90; // Number of items per page
 let currentPage = 1;
 let products2 = products;
+const minPriceInput = document.getElementById("min-price");
+const maxPriceInput = document.getElementById("max-price");
+const applyPriceFilterButton = document.getElementById("apply-price-filter");
+const minDiscInput = document.getElementById("min-disc");
+const maxDiscInput = document.getElementById("max-disc");
+const applyDiscFilterButton = document.getElementById("apply-disc-filter");
+const sortByPriceSelect = document.getElementById("sort-by-price");
+const sortByDiscSelect = document.getElementById("sort-by-disc");
+const goldCategoryCheckbox = document.getElementById("gold-category-filter");
+const productSearchInput = document.getElementById("product-search");
+const searchButton = document.getElementById("search-button");
+const sortByScSelect = document.getElementById("sort-by-sc");
 
 function displayProducts(products, page = 1) {
   products = products.filter((product) => {
@@ -47,7 +59,6 @@ function displayProducts(products, page = 1) {
 
   updatePaginationControls(products, page);
 }
-
 function updatePaginationControls(products, page) {
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const pageInfo = document.getElementById("page-info");
@@ -59,36 +70,6 @@ function updatePaginationControls(products, page) {
   prevPageButton.disabled = page === 1;
   nextPageButton.disabled = page === totalPages;
 }
-
-document.getElementById("prev-page").addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    displayProducts(products2, currentPage);
-  }
-});
-
-document.getElementById("next-page").addEventListener("click", () => {
-  const totalPages = Math.ceil(products2.length / itemsPerPage);
-  if (currentPage < totalPages) {
-    currentPage++;
-    displayProducts(products2, currentPage);
-    window.scrollTo(0, 0);
-  }
-});
-
-// Apply existing filter, sort, and search functions
-// ...
-
-// displayProducts(products2, currentPage);
-
-// let products2 = products;
-
-//price filter functionality
-
-const minPriceInput = document.getElementById("min-price");
-const maxPriceInput = document.getElementById("max-price");
-const applyPriceFilterButton = document.getElementById("apply-price-filter");
-
 function filterByPriceRange(minPrice, maxPrice) {
   products2 = products2.filter((product) => {
     const productPrice = product.fin_price_w_vat;
@@ -98,29 +79,6 @@ function filterByPriceRange(minPrice, maxPrice) {
   // Display the filtered products
   displayProducts(products2);
 }
-
-applyPriceFilterButton.addEventListener("click", () => {
-
-});
-
-//dic filter functionality
-const minDiscInput = document.getElementById("min-disc");
-const maxDiscInput = document.getElementById("max-disc");
-const applyDiscFilterButton = document.getElementById("apply-disc-filter");
-applyDiscFilterButton.addEventListener("click", () => {
-  const minDisc = parseFloat(minDiscInput.value) || 0;
-  const maxDisc = parseFloat(maxDiscInput.value) || Infinity;
-
-  // Filter products by the specified price range
-  filterByDiscRange(minDisc, maxDisc);
-  if (minPriceInput.value.trim() !== '' || maxPriceInput.value.trim() !== '') {
-    const minPrice = parseFloat(minPriceInput.value) || 0;
-    const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
-
-    // Filter products by the specified price range
-    filterByPriceRange(minPrice, maxPrice);
-  }
-});
 function filterByDiscRange(minDisc, maxDisc) {
   products2 = products2.filter((product) => {
     const productDisc = parseInt(
@@ -133,20 +91,6 @@ function filterByDiscRange(minDisc, maxDisc) {
   // Display the filtered products
   displayProducts(products2);
 }
-
-//price sort functionality
-const sortByPriceSelect = document.getElementById("sort-by-price");
-sortByPriceSelect.addEventListener("change", () => {
-  const selectedOption = sortByPriceSelect.value;
-
-  if (selectedOption === "low-to-high") {
-    // Sort products by price in ascending order (lowest to highest)
-    sortByPriceAscending();
-  } else if (selectedOption === "high-to-low") {
-    // Sort products by price in descending order (highest to lowest)
-    sortByPriceDescending();
-  }
-});
 function sortByPriceAscending() {
   products2 = [...products2];
   products2.sort((a, b) => a.fin_price_w_vat - b.fin_price_w_vat);
@@ -161,20 +105,6 @@ function sortByPriceDescending() {
   // Display the sorted products
   displayProducts(products2);
 }
-
-//dic sort functionality
-const sortByDiscSelect = document.getElementById("sort-by-disc");
-sortByDiscSelect.addEventListener("change", () => {
-  const selectedOption = sortByDiscSelect.value;
-
-  if (selectedOption === "low-to-high") {
-    // Sort products by price in ascending order (lowest to highest)
-    sortByDiscAscending();
-  } else if (selectedOption === "high-to-low") {
-    // Sort products by price in descending order (highest to lowest)
-    sortByDiscDescending();
-  }
-});
 function sortByDiscAscending() {
   products2 = [...products2];
   products2.sort(
@@ -197,15 +127,6 @@ function sortByDiscDescending() {
   // Display the sorted products
   displayProducts(products2);
 }
-
-//gold filter functionality
-const goldCategoryCheckbox = document.getElementById("gold-category-filter");
-goldCategoryCheckbox.addEventListener("change", () => {
-  const showGoldCategory = goldCategoryCheckbox.checked;
-
-  // Filter products by the "GOLD" category
-  filterByGoldCategory(showGoldCategory);
-});
 function filterByGoldCategory(showGoldCategory) {
   if (showGoldCategory) {
     products2 = products2.filter((product) => product.gen_cat.n === "GOLD");
@@ -216,25 +137,6 @@ function filterByGoldCategory(showGoldCategory) {
     displayProducts(products2);
   }
 }
-
-//search functionality
-const productSearchInput = document.getElementById("product-search");
-const searchButton = document.getElementById("search-button");
-searchButton.addEventListener("click", () => {
-  const searchTerm = productSearchInput.value.trim().toLowerCase();
-  console.log(searchTerm);
-
-  // Perform the product search
-  performProductSearch(searchTerm);
-});
-productSearchInput.addEventListener("keyup", (event) => {
-  if (event.key === "Enter") {
-    const searchTerm = productSearchInput.value.trim().toLowerCase();
-
-    // Perform the product search
-    performProductSearch(searchTerm);
-  }
-});
 function performProductSearch(searchTerm) {
   function searchInObject(obj, searchTerm) {
     for (const key in obj) {
@@ -262,20 +164,6 @@ function performProductSearch(searchTerm) {
   displayProducts(products2);
   console.log(products2);
 }
-
-//src sort functionality
-const sortByScSelect = document.getElementById("sort-by-sc");
-sortByScSelect.addEventListener("change", () => {
-  const selectedOption = sortByScSelect.value;
-
-  if (selectedOption === "low-to-high") {
-    // Sort products by price in ascending order (lowest to highest)
-    sortByScAscending();
-  } else if (selectedOption === "high-to-low") {
-    // Sort products by price in descending order (highest to lowest)
-    sortByScDescending();
-  }
-});
 function sortByScAscending() {
   products2 = [...products2];
   products2.sort((a, b) => a.sc_id - b.sc_id);
@@ -291,6 +179,91 @@ function sortByScDescending() {
   displayProducts(products2);
 }
 
+document.getElementById("prev-page").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    displayProducts(products2, currentPage);
+  }
+});
+document.getElementById("next-page").addEventListener("click", () => {
+  const totalPages = Math.ceil(products2.length / itemsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    displayProducts(products2, currentPage);
+    window.scrollTo(0, 0);
+  }
+});
+// applyPriceFilterButton.addEventListener("click", () => {
+
+// });
+applyDiscFilterButton.addEventListener("click", () => {
+  const minDisc = parseFloat(minDiscInput.value) || 0;
+  const maxDisc = parseFloat(maxDiscInput.value) || Infinity;
+
+  // Filter products by the specified price range
+  filterByDiscRange(minDisc, maxDisc);
+  if (minPriceInput.value.trim() !== '' || maxPriceInput.value.trim() !== '') {
+    const minPrice = parseFloat(minPriceInput.value) || 0;
+    const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+
+    // Filter products by the specified price range
+    filterByPriceRange(minPrice, maxPrice);
+  }
+});
+sortByPriceSelect.addEventListener("change", () => {
+  const selectedOption = sortByPriceSelect.value;
+
+  if (selectedOption === "low-to-high") {
+    // Sort products by price in ascending order (lowest to highest)
+    sortByPriceAscending();
+  } else if (selectedOption === "high-to-low") {
+    // Sort products by price in descending order (highest to lowest)
+    sortByPriceDescending();
+  }
+});
+sortByDiscSelect.addEventListener("change", () => {
+  const selectedOption = sortByDiscSelect.value;
+
+  if (selectedOption === "low-to-high") {
+    // Sort products by price in ascending order (lowest to highest)
+    sortByDiscAscending();
+  } else if (selectedOption === "high-to-low") {
+    // Sort products by price in descending order (highest to lowest)
+    sortByDiscDescending();
+  }
+});
+goldCategoryCheckbox.addEventListener("change", () => {
+  const showGoldCategory = goldCategoryCheckbox.checked;
+
+  // Filter products by the "GOLD" category
+  filterByGoldCategory(showGoldCategory);
+});
+searchButton.addEventListener("click", () => {
+  const searchTerm = productSearchInput.value.trim().toLowerCase();
+  console.log(searchTerm);
+
+  // Perform the product search
+  performProductSearch(searchTerm);
+});
+productSearchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    const searchTerm = productSearchInput.value.trim().toLowerCase();
+
+    // Perform the product search
+    performProductSearch(searchTerm);
+  }
+});
+sortByScSelect.addEventListener("change", () => {
+  const selectedOption = sortByScSelect.value;
+
+  if (selectedOption === "low-to-high") {
+    // Sort products by price in ascending order (lowest to highest)
+    sortByScAscending();
+  } else if (selectedOption === "high-to-low") {
+    // Sort products by price in descending order (highest to lowest)
+    sortByScDescending();
+  }
+});
 displayProducts(products);
 
 ////////////////////////////////////////////////////////
