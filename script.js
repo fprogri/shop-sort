@@ -24,7 +24,7 @@ function displayProducts(products, page = 1) {
     const src = `https://jysk.al/public/clickkon/product/${product.clickkon_product_id}/image/small/download`;
     const discount = parseInt(
       ((product.price_w_vat - product.fin_price_w_vat) / product.price_w_vat) *
-        100
+      100
     );
 
     const productCard = document.createElement("div");
@@ -100,11 +100,7 @@ function filterByPriceRange(minPrice, maxPrice) {
 }
 
 applyPriceFilterButton.addEventListener("click", () => {
-  const minPrice = parseFloat(minPriceInput.value) || 0;
-  const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
 
-  // Filter products by the specified price range
-  filterByPriceRange(minPrice, maxPrice);
 });
 
 //dic filter functionality
@@ -117,12 +113,19 @@ applyDiscFilterButton.addEventListener("click", () => {
 
   // Filter products by the specified price range
   filterByDiscRange(minDisc, maxDisc);
+  if (minPriceInput.value.trim() !== '' || maxPriceInput.value.trim() !== '') {
+    const minPrice = parseFloat(minPriceInput.value) || 0;
+    const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+
+    // Filter products by the specified price range
+    filterByPriceRange(minPrice, maxPrice);
+  }
 });
 function filterByDiscRange(minDisc, maxDisc) {
   products2 = products2.filter((product) => {
     const productDisc = parseInt(
       ((product.price_w_vat - product.fin_price_w_vat) / product.price_w_vat) *
-        100
+      100
     );
     return productDisc >= minDisc && productDisc <= maxDisc;
   });
