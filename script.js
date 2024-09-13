@@ -72,6 +72,7 @@ document.getElementById("next-page").addEventListener("click", () => {
   if (currentPage < totalPages) {
     currentPage++;
     displayProducts(products2, currentPage);
+    window.scrollTo(0, 0);
   }
 });
 
