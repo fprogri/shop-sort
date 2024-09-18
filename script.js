@@ -6,7 +6,7 @@ let currentPage = 1;
 let products2 = products;
 const minPriceInput = document.getElementById("min-price");
 const maxPriceInput = document.getElementById("max-price");
-const applyPriceFilterButton = document.getElementById("apply-price-filter");
+// const applyPriceFilterButton = document.getElementById("apply-price-filter");
 const minDiscInput = document.getElementById("min-disc");
 const maxDiscInput = document.getElementById("max-disc");
 const applyDiscFilterButton = document.getElementById("apply-disc-filter");
@@ -14,7 +14,7 @@ const sortByPriceSelect = document.getElementById("sort-by-price");
 const sortByDiscSelect = document.getElementById("sort-by-disc");
 const goldCategoryCheckbox = document.getElementById("gold-category-filter");
 const productSearchInput = document.getElementById("product-search");
-const searchButton = document.getElementById("search-button");
+// const searchButton = document.getElementById("search-button");
 const sortByScSelect = document.getElementById("sort-by-sc");
 
 function displayProducts(products, page = 1) {
@@ -36,7 +36,7 @@ function displayProducts(products, page = 1) {
     const src = `https://jysk.al/public/clickkon/product/${product.clickkon_product_id}/image/small/download`;
     const discount = parseInt(
       ((product.price_w_vat - product.fin_price_w_vat) / product.price_w_vat) *
-      100
+        100
     );
 
     const productCard = document.createElement("div");
@@ -83,7 +83,7 @@ function filterByDiscRange(minDisc, maxDisc) {
   products2 = products2.filter((product) => {
     const productDisc = parseInt(
       ((product.price_w_vat - product.fin_price_w_vat) / product.price_w_vat) *
-      100
+        100
     );
     return productDisc >= minDisc && productDisc <= maxDisc;
   });
@@ -202,12 +202,19 @@ applyDiscFilterButton.addEventListener("click", () => {
 
   // Filter products by the specified price range
   filterByDiscRange(minDisc, maxDisc);
-  if (minPriceInput.value.trim() !== '' || maxPriceInput.value.trim() !== '') {
+  if (minPriceInput.value.trim() !== "" || maxPriceInput.value.trim() !== "") {
     const minPrice = parseFloat(minPriceInput.value) || 0;
     const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
 
     // Filter products by the specified price range
     filterByPriceRange(minPrice, maxPrice);
+  }
+  if (productSearchInput.value.trim() !== "") {
+    const searchTerm = productSearchInput.value.trim().toLowerCase();
+    // console.log(searchTerm);
+
+    // Perform the product search
+    performProductSearch(searchTerm);
   }
 });
 sortByPriceSelect.addEventListener("change", () => {
@@ -238,13 +245,9 @@ goldCategoryCheckbox.addEventListener("change", () => {
   // Filter products by the "GOLD" category
   filterByGoldCategory(showGoldCategory);
 });
-searchButton.addEventListener("click", () => {
-  const searchTerm = productSearchInput.value.trim().toLowerCase();
-  console.log(searchTerm);
-
-  // Perform the product search
-  performProductSearch(searchTerm);
-});
+// searchButton.addEventListener("click", () => {
+//
+// });
 productSearchInput.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     const searchTerm = productSearchInput.value.trim().toLowerCase();
@@ -265,16 +268,3 @@ sortByScSelect.addEventListener("change", () => {
   }
 });
 displayProducts(products);
-
-////////////////////////////////////////////////////////
-
-// function updateDiv2Margin() {
-//   var div1Height = document.querySelector(".filter-controls").offsetHeight;
-//   document.querySelector(".product-list").style.marginTop = div1Height + "px";
-// }
-
-// // Call the function initially
-// updateDiv2Margin();
-
-// // Add an event listener to update the margin if the viewport size changes
-// window.addEventListener("resize", updateDiv2Margin);
