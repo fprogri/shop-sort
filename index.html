@@ -11,53 +11,55 @@
 
 <body>
     <div class="filter-controls">
-        <div class="filter">
-            <input type="text" id="product-search" placeholder="Search">
-            <button id="search-button">Search</button>
-        </div>
+        <div>
+            <div class="filter">
+                <input type="text" id="product-search" placeholder="Search">
+                <!-- <button id="search-button">Search</button> -->
+            </div>
 
-        <div class="filter">
-            <input type="number" id="min-price" placeholder="Min Price">
-            <input type="number" id="max-price" placeholder="Max Price">
-            <button id="apply-price-filter">Apply</button>
+            <div class="filter">
+                <input type="number" id="min-price" placeholder="Min Price">
+                <input type="number" id="max-price" placeholder="Max Price">
+                <!-- <button id="apply-price-filter">Apply</button> -->
+            </div>
+            <div class="filter">
+                <input type="number" id="min-disc" placeholder="Min Disc">
+                <input type="number" id="max-disc" placeholder="Max Disc">
+                <button id="apply-disc-filter">Apply</button>
+            </div>
         </div>
-        <div class="filter">
-            <input type="number" id="min-disc" placeholder="Min Disc">
-            <input type="number" id="max-disc" placeholder="Max Disc">
-            <button id="apply-disc-filter">Apply</button>
-        </div>
-        <div class="filter">
-            <select id="sort-by-price">
-                <option value="none">Proce sort</option>
-                <option value="low-to-high">Lowest to Highest</option>
-                <option value="high-to-low">Highest to Lowest</option>
-            </select>
-        </div>
-        <div class="filter">
-            <select id="sort-by-disc">
-                <option value="none">Disc sort</option>
-                <option value="low-to-high">Lowest to Highest</option>
-                <option value="high-to-low">Highest to Lowest</option>
-            </select>
-        </div>
-        <div class="filter">
-            <select id="sort-by-sc">
-                <option value="none">sc sort</option>
-                <option value="low-to-high">Lowest to Highest</option>
-                <option value="high-to-low">Highest to Lowest</option>
-            </select>
-        </div>
-        <div class="filter">
-            <div class="gold">
-                <label for="gold-category-filter">GOLD</label>
-                <input type="checkbox" id="gold-category-filter">
+        <div>
+            <div class="filter">
+                <select id="sort-by-price">
+                    <option value="none">Proce sort</option>
+                    <option value="low-to-high">Lowest to Highest</option>
+                    <option value="high-to-low">Highest to Lowest</option>
+                </select>
+            </div>
+            <div class="filter">
+                <select id="sort-by-disc">
+                    <option value="none">Disc sort</option>
+                    <option value="low-to-high">Lowest to Highest</option>
+                    <option value="high-to-low">Highest to Lowest</option>
+                </select>
+            </div>
+            <div class="filter">
+                <select id="sort-by-sc">
+                    <option value="none">sc sort</option>
+                    <option value="low-to-high">Lowest to Highest</option>
+                    <option value="high-to-low">Highest to Lowest</option>
+                </select>
+            </div>
+            <div class="filter">
+                <div class="gold">
+                    <label for="gold-category-filter">GOLD</label>
+                    <input type="checkbox" id="gold-category-filter">
+                </div>
             </div>
         </div>
         <div class="filter" id="productCount"></div>
-
-
-
     </div>
+
     <div class="product-list">
         <!-- Product list goes here -->
     </div>
