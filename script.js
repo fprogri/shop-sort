@@ -19,7 +19,8 @@ const sortByScSelect = document.getElementById("sort-by-sc");
 
 function displayProducts(products, page = 1) {
   products = products.filter((product) => {
-    return product.ind_camp_description !== "KMP Problematik";
+    // return product.ind_camp_description !== "KMP Problematik";
+    return !product.ind_camp_description.toLowerCase().includes("problematik");
   });
 
   const startIndex = (page - 1) * itemsPerPage;
