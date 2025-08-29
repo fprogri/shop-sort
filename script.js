@@ -17,6 +17,7 @@ const productSearchInput = document.getElementById("product-search");
 // const searchButton = document.getElementById("search-button");
 const sortByScSelect = document.getElementById("sort-by-sc");
 
+
 function displayProducts(products, page = 1) {
   products = products.filter((product) => {
     return product.ind_camp_description !== "Problematik";
